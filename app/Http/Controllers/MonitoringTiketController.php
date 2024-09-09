@@ -54,7 +54,7 @@ class MonitoringTiketController extends Controller
             $fileName = time() . '.' . $file->getClientOriginalExtension();
             $file->storeAs('uploads', $fileName, 'public');
         }
-        
+
         $ticket->update([
             'status_id' => $request->status_id,
             'foto' => $fileName,
@@ -74,7 +74,7 @@ class MonitoringTiketController extends Controller
 
     public function ticketMasuk()
     {
-        $userId = Auth::id(); 
+        $userId = Auth::id();
         $query = Ticket::where('teknisi', $userId)
                         ->whereIn('status_id', [1])
                         ->get();
@@ -86,7 +86,7 @@ class MonitoringTiketController extends Controller
 
     public function ticketProgress()
     {
-        $userId = Auth::id(); 
+        $userId = Auth::id();
         $query = Ticket::where('teknisi', $userId)
                         ->whereIn('status_id', [2])
                         ->get();
@@ -98,7 +98,7 @@ class MonitoringTiketController extends Controller
 
     public function ticketSelesai()
     {
-        $userId = Auth::id(); 
+        $userId = Auth::id();
         $query = Ticket::where('teknisi', $userId)
                         ->whereIn('status_id', [3,4])
                         ->get();

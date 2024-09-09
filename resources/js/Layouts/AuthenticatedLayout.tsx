@@ -8,10 +8,11 @@ import { User } from "@/types"
 import { ToastContainer, toast } from "react-toastify"
 import "react-toastify/dist/ReactToastify.css"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "@/Components/ui/dropdown-menu"
+import { Bell } from "lucide-react"
 
 export default function Authenticated({ user, header, children }: PropsWithChildren<{ user: User; header?: ReactNode }>) {
   const [showingNavigationDropdown, setShowingNavigationDropdown] = useState(false)
-  const { flash }: any = usePage().props
+  const { flash, auth }: any = usePage().props
 
   useEffect(() => {
     if (flash.success) {
@@ -23,7 +24,7 @@ export default function Authenticated({ user, header, children }: PropsWithChild
   }, [flash])
 
   return (
-    
+
     <div className="min-h-screen bg-gray-100 dark:bg-gray-900">
       <nav className="bg-white dark:bg-gray-800 border-b border-gray-100 dark:border-gray-700">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -64,7 +65,7 @@ export default function Authenticated({ user, header, children }: PropsWithChild
                     </Dropdown>
                   </div>
                 </div>
-                
+
                 <div className="hidden sm:flex sm:items-center sm:ms-6">
                   <div className="ms-3 relative">
                     <Dropdown>
@@ -87,7 +88,7 @@ export default function Authenticated({ user, header, children }: PropsWithChild
                     </Dropdown>
                   </div>
                 </div>
-                
+
                 <div className="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                   <NavLink href={route("case_category.index")} active={route().current("case_category.*")}>
                     Kategori
@@ -159,6 +160,17 @@ export default function Authenticated({ user, header, children }: PropsWithChild
             </div>
 
             <div className="hidden sm:flex sm:items-center sm:ms-6">
+            <div>
+
+                <button type="button" className="relative inline-flex items-center p-3 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                    <Bell size={20} />
+                    <span className="sr-only">Notifications</span>
+                    <div className="absolute inline-flex items-center justify-center w-6 h-6 text-xs font-bold text-white bg-red-500 border-2 border-white rounded-full -top-2 -end-2 dark:border-gray-900">
+                        {auth.notif.length ?? 0}
+                    </div>
+                </button>
+
+            </div>
               <div className="ms-3 relative">
                 <Dropdown>
                   <Dropdown.Trigger>
