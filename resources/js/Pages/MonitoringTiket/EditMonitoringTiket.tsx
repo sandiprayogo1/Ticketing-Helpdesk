@@ -46,14 +46,15 @@ const EditMonitoringTiket = ({ auth }: PageProps) => {
   const handleFile = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.currentTarget.files) {
       setData("foto", e.currentTarget.files[0]);
+
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        setPreview(e?.target?.result as string);
+      }
+
+      reader.readAsDataURL(e.currentTarget.files[0])
     }
 
-    const reader = new FileReader();
-    reader.onload = (e) => {
-      setPreview(e?.target?.result as string);
-    }
-
-    reader.readAsDataURL(e.currentTarget.files[0])
   };
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {

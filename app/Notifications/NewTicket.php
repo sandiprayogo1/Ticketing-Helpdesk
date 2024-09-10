@@ -38,7 +38,8 @@ class NewTicket extends Notification
     public function toArray(object $notifiable): array
     {
         return [
-            'data' => $this->data->no_ticket.' baru ditambahkan.'
+            'id' => $this->data->id,
+            'nomor_ticket' => $this->data->nomor_ticket,
         ];
     }
 }

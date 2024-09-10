@@ -107,4 +107,10 @@ class MonitoringTiketController extends Controller
 
         return Inertia::render('MonitoringTiket/TiketSelesai', compact('tickets', 'users'));
     }
+
+    public function readNotif(Request $request)
+    {
+        $notif = Auth::user()->unreadNotifications->find($request->id);
+        $notif->markAsRead();
+    }
 }

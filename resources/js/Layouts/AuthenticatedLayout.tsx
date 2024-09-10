@@ -9,10 +9,12 @@ import { ToastContainer, toast } from "react-toastify"
 import "react-toastify/dist/ReactToastify.css"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "@/Components/ui/dropdown-menu"
 import { Bell } from "lucide-react"
+import NotificationButton from "@/Components/NotificationButton"
 
 export default function Authenticated({ user, header, children }: PropsWithChildren<{ user: User; header?: ReactNode }>) {
   const [showingNavigationDropdown, setShowingNavigationDropdown] = useState(false)
   const { flash, auth }: any = usePage().props
+  console.log(auth.notif)
 
   useEffect(() => {
     if (flash.success) {
@@ -160,16 +162,8 @@ export default function Authenticated({ user, header, children }: PropsWithChild
             </div>
 
             <div className="hidden sm:flex sm:items-center sm:ms-6">
-            <div>
-
-                <button type="button" className="relative inline-flex items-center p-3 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                    <Bell size={20} />
-                    <span className="sr-only">Notifications</span>
-                    <div className="absolute inline-flex items-center justify-center w-6 h-6 text-xs font-bold text-white bg-red-500 border-2 border-white rounded-full -top-2 -end-2 dark:border-gray-900">
-                        {auth.notif.length ?? 0}
-                    </div>
-                </button>
-
+            <div className="relative">
+                <NotificationButton notifications={auth.notif} />
             </div>
               <div className="ms-3 relative">
                 <Dropdown>

@@ -61,6 +61,8 @@ Route::middleware('auth')->group(function () {
     Route::get('ticketProgress', [MonitoringTiketController::class, 'ticketProgress'])->name('ticketProgress');
     Route::get('ticketSelesai', [MonitoringTiketController::class, 'ticketSelesai'])->name('ticketSelesai');
 
+    // nofif
+    Route::post('readNotif', [MonitoringTiketController::class, 'readNotif'])->name('readNotif');
 });
 
 require __DIR__ . '/auth.php';
