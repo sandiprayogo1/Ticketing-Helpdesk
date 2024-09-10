@@ -4,7 +4,7 @@ import { Table, TableBody, TableHead, TableHeader, TableRow, TableCell } from "@
 import Authenticated from "@/Layouts/AuthenticatedLayout";
 import { PageProps } from "@/types";
 import { usePage, useForm } from "@inertiajs/react";
-import { Button } from "@/components/ui/button"; // Mengimpor komponen Button
+import { Button } from "@/Components/ui/button"; // Mengimpor komponen Button
 import { Edit, Eye } from "lucide-react"; // Mengimpor ikon Edit dari lucide-react
 
 import React from "react";
@@ -17,7 +17,7 @@ interface Ticket {
   level: string;
   tempat: string;
   bagian: string;
-  teknisi: number; 
+  teknisi: number;
   status: string;
   request_date: string;
 }

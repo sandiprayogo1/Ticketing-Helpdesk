@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Models\Status;
 use App\Models\Ticket;
 use Illuminate\Http\Request;
+use Illuminate\Notifications\DatabaseNotification;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 
@@ -110,7 +111,11 @@ class MonitoringTiketController extends Controller
 
     public function readNotif(Request $request)
     {
-        $notif = Auth::user()->unreadNotifications->find($request->id);
-        $notif->markAsRead();
+        $notification = DatabaseNotification::find($request->id);
+        if ($notification) {
+            $notification->delete();
+        }
+
+        return redirect()->route('ticketMasuk.detail', ['id' => $request->ticket_id]);
     }
 }

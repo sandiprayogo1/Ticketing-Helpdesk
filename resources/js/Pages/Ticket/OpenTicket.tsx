@@ -6,7 +6,7 @@ import { PageProps } from "@/types"
 import { Head, useForm, usePage } from "@inertiajs/react"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/Components/ui/select"
 import { Textarea } from "@/Components/ui/textarea"
-import { Button } from "@/components/ui/button"
+import { Button } from "@/Components/ui/button"
 import React from "react"
 import { error } from "console"
 
@@ -52,7 +52,7 @@ const OpenTicket = ({ auth }: PageProps) => {
           case_category_id: "",
           deskripsi: "",
           tempat: "",
-          user_id: "", 
+          user_id: "",
         })
         reset()
       },

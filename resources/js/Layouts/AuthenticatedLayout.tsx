@@ -10,11 +10,18 @@ import "react-toastify/dist/ReactToastify.css"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "@/Components/ui/dropdown-menu"
 import { Bell } from "lucide-react"
 import NotificationButton from "@/Components/NotificationButton"
+import echo from "@/echo"
+
+interface Notification {
+    id: string;
+    ticket_id: number;
+    nomor_ticket: string;
+    type: string
+}
 
 export default function Authenticated({ user, header, children }: PropsWithChildren<{ user: User; header?: ReactNode }>) {
   const [showingNavigationDropdown, setShowingNavigationDropdown] = useState(false)
   const { flash, auth }: any = usePage().props
-  console.log(auth.notif)
 
   useEffect(() => {
     if (flash.success) {
@@ -163,7 +170,7 @@ export default function Authenticated({ user, header, children }: PropsWithChild
 
             <div className="hidden sm:flex sm:items-center sm:ms-6">
             <div className="relative">
-                <NotificationButton notifications={auth.notif} />
+                <NotificationButton userId={auth.user.id} />
             </div>
               <div className="ms-3 relative">
                 <Dropdown>

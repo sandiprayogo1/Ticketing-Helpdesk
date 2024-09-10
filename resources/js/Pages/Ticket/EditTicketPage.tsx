@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { Link, useForm, usePage } from "@inertiajs/react";
-import { Button } from "@/components/ui/button";
+import { Button } from "@/Components/ui/button";
 import { Label } from "@/Components/ui/label";
 import { Input } from "@/Components/ui/input";
 import InputError from "@/Components/InputError"; // Pastikan impor benar
