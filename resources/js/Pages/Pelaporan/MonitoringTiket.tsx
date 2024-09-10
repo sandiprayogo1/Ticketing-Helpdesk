@@ -1,4 +1,4 @@
-import { Button } from "@/components/ui/button";
+import { Button } from "@/Components/ui/button";
 import { Table, TableBody, TableHead, TableHeader, TableRow, TableCell } from "@/Components/ui/table";
 import Authenticated from "@/Layouts/AuthenticatedLayout";
 import { PageProps } from "@/types";
@@ -15,7 +15,7 @@ interface Ticket {
   level: string;
   tempat: string;
   deskripsi: string;
-  teknisi: number; 
+  teknisi: number;
   status: string;
   request_date: string;
 }

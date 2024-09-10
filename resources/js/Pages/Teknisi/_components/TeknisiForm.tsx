@@ -1,6 +1,6 @@
 import React, { useState } from "react"
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/Components/ui/dialog"
-import { Button } from "@/components/ui/button"
+import { Button } from "@/Components/ui/button"
 import { Edit } from "lucide-react"
 import { useForm } from "@inertiajs/react"
 import { Label } from "@/Components/ui/label"

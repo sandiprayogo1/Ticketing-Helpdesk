@@ -4,7 +4,7 @@ import { Table, TableBody, TableHead, TableHeader, TableRow, TableCell } from "@
 import Authenticated from "@/Layouts/AuthenticatedLayout";
 import { PageProps } from "@/types";
 import { usePage, useForm } from "@inertiajs/react";
-import { Button } from "@/components/ui/button";
+import { Button } from "@/Components/ui/button";
 import { Edit, Eye } from "lucide-react";
 
 import React from "react";

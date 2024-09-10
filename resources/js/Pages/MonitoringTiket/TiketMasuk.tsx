@@ -3,7 +3,7 @@ import { Table, TableBody, TableHead, TableHeader, TableRow, TableCell } from "@
 import Authenticated from "@/Layouts/AuthenticatedLayout";
 import { PageProps } from "@/types";
 import { usePage, useForm, router } from "@inertiajs/react";
-import { Button } from "@/components/ui/button";
+import { Button } from "@/Components/ui/button";
 import { Check, Eye } from "lucide-react";
 import ConfirmAccept from "@/Components/ConfirmAccept";
 

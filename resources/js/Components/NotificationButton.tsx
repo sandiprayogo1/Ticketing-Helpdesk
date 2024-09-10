@@ -1,15 +1,19 @@
 import { router } from "@inertiajs/react";
 import { Bell } from "lucide-react";
 import { useEffect, useState } from "react";
+import echo from "@/echo";
+import axios from "axios";
 
-interface TicketNotif {
-    id: number;
+interface DataNotif {
+    id: string;
+    ticket_id: number;
     nomor_ticket: string;
+    type: string;
 }
 
-interface Notif {
+interface Notification {
     created_at: string;
-    data: TicketNotif;
+    data: DataNotif;
     id: string;
     notifiable_id: number;
     notifiable_type: string;
@@ -18,23 +22,43 @@ interface Notif {
     updated_at: string;
 }
 
-function NotificationButton({ notifications }: { notifications: Notif[] }) {
-    const [isPopupVisible, setIsPopupVisible] = useState(false);
+function NotificationButton({ userId }: { userId: number }) {
+    const [notifications, setNotifications] = useState<Notification[]>([])
+    const [showPopup, setShowPopup] = useState<boolean>(false);
+
+    useEffect(() => {
+        echo.private('App.Models.User.' + userId)
+            .notification((e: any) => {
+                setNotifications((prev) => [e, ...prev])
+            });
+
+        axios.post('/api/notifications', {
+            id: userId
+        })
+        .then(({ data }: any) => {
+            const newNotif = data.notifications.map((item: Notification) => ({
+               ...item.data,
+               id: item.id,
+               type: item.type
+            }))
+            setNotifications(newNotif)
+        })
+        .catch((error) => console.log(error))
+    }, []);
 
     const handleButtonClick = () => {
-        setIsPopupVisible(!isPopupVisible);
+        setShowPopup(!showPopup);
     };
 
-    const handlePopupClick = async (data: TicketNotif, id: string) => {
-        await router.post(route('readNotif'), { id: id })
-        router.get(route("ticketMasuk.detail", data.id))
+    const handlePopupClick = (data: DataNotif) => {
+        router.post(route('readNotif'), { id: data.id, ticket_id: data.ticket_id })
     };
 
     // useEffect(() => {
-    //     if (isPopupVisible) {
+    //     if (showPopup) {
 
     //     }
-    // }, [isPopupVisible]);
+    // }, [showPopup]);
 
     return (
         <div className="relative">
@@ -46,15 +70,15 @@ function NotificationButton({ notifications }: { notifications: Notif[] }) {
                 </div>
             </button>
 
-            {isPopupVisible && (
+            {showPopup && (
                 <div
                 id="popup"
                 className="absolute top-full right-0 bg-white rounded-lg shadow-md p-2"
                 >
                 <ul>
-                    {notifications.map((notification) => (
-                    <li onClick={() => handlePopupClick(notification.data, notification.id)} key={notification.id} className="p-2 cursor-pointer hover:bg-slate-100">
-                        {notification.data.nomor_ticket}
+                    {notifications.map((e: any) => (
+                    <li onClick={() => handlePopupClick(e)} key={e.id} className="p-2 cursor-pointer hover:bg-slate-100">
+                        {e.nomor_ticket}
                     </li>
                     ))}
                 </ul>

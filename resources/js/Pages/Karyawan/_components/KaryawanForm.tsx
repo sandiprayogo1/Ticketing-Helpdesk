@@ -7,7 +7,7 @@ import { useForm, usePage } from "@inertiajs/react"
 import { useState } from "react"
 import InputError from "@/Components/InputError"
 import { Edit } from "lucide-react"
-import { Button } from "@/components/ui/button"
+import { Button } from "@/Components/ui/button"
 import { bagianOptions } from "@/lib/data/bagian"
 
 interface Jabatans {

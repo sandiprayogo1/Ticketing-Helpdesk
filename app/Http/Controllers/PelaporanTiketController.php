@@ -116,7 +116,7 @@ class PelaporanTiketController extends Controller
 
         if ($ticket) {
             $teknisi = User::findOrFail($selectedTeknisi);
-            $teknisi->notify(new NewTicket($ticket));
+            $teknisi->notify(new NewTicket($teknisi->id, $ticket));
         }
 
         return redirect()->route('pelaporan')->with('success', 'Laporan anda berhasil dibuat');

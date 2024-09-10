@@ -1,7 +1,7 @@
 import React from "react"
 import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from "@/Components/ui/alert-dialog"
-import { Button } from "./ui/button"
 import { Check } from "lucide-react"
+import { Button } from "@/Components/ui/button";
 
 interface ConfirmAcceptProps {
   onConfirm: () => void
