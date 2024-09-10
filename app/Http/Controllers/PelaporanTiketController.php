@@ -11,6 +11,7 @@ use App\Models\CaseCategory;
 use App\Models\SkalaLevel;
 use App\Models\Ticket;
 use App\Models\User;
+use App\Notifications\NewTicket;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 
@@ -102,7 +103,7 @@ class PelaporanTiketController extends Controller
 
         $selectedTeknisi = $availTeknisis[0];
 
-        Ticket::create([
+        $ticket = Ticket::create([
             "nomor_ticket"       => Ticket::nomorTicket(),
             "requester"          => $requester,
             "case_category_id"   => $request->case_category_id,
@@ -112,6 +113,11 @@ class PelaporanTiketController extends Controller
             "status_id"          => 1,
             "teknisi"            => $selectedTeknisi
         ]);
+
+        if ($ticket) {
+            $teknisi = User::findOrFail($selectedTeknisi);
+            $teknisi->notify(new NewTicket($ticket));
+        }
 
         return redirect()->route('pelaporan')->with('success', 'Laporan anda berhasil dibuat');
     }

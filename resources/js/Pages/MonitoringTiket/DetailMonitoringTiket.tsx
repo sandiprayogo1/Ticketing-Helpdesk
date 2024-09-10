@@ -6,6 +6,7 @@ import { Input } from "@/Components/ui/input";
 import InputError from "@/Components/InputError";
 import Authenticated from "@/Layouts/AuthenticatedLayout";
 import { PageProps } from "@/types";
+import ConfirmAccept from "@/Components/ConfirmAccept";
 
 interface Ticket {
   id: number;
@@ -21,6 +22,7 @@ interface Ticket {
   request_date: string;
   foto: string;
   deskripsi_pm: string;
+  teknisi_id: number;
 }
 
 interface DetailMonitoringTiketProps extends PageProps {
@@ -29,7 +31,15 @@ interface DetailMonitoringTiketProps extends PageProps {
 
 const DetailMonitoringTiket = ({ auth }: PageProps) => {
   const { ticket } = usePage<DetailMonitoringTiketProps>().props;
-  console.log(ticket)
+
+  const handleAccept = (ticket: Ticket) => {
+    router.post(route("tickets.update", ticket.id), {
+        _method: 'patch',
+        teknisi: ticket.teknisi_id,
+        status_id: 2
+    })
+  };
+
   return (
     <Authenticated user={auth.user} header={<h2 className="header-text">Edit Tiket</h2>}>
       <div className="py-12">
@@ -58,9 +68,12 @@ const DetailMonitoringTiket = ({ auth }: PageProps) => {
 
 
             <div className="flex items-center justify-end">
-            <Button onClick={() => window.history.back()} className="ml-5 px-4 py-2 bg-black text-white rounded-md hover:bg-blac">
+            {ticket.status === 'Open' && (
+                <ConfirmAccept onConfirm={() => handleAccept(ticket)} />
+            )}
+            <Link href={route('ticketMasuk')} className="ml-5 px-4 py-2 bg-black text-white rounded-md hover:bg-blac">
                 Kembali
-            </Button>
+            </Link>
             </div>
           </div>
         </div>

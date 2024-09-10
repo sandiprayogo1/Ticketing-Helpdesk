@@ -8,10 +8,13 @@ import { User } from "@/types"
 import { ToastContainer, toast } from "react-toastify"
 import "react-toastify/dist/ReactToastify.css"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "@/Components/ui/dropdown-menu"
+import { Bell } from "lucide-react"
+import NotificationButton from "@/Components/NotificationButton"
 
 export default function Authenticated({ user, header, children }: PropsWithChildren<{ user: User; header?: ReactNode }>) {
   const [showingNavigationDropdown, setShowingNavigationDropdown] = useState(false)
-  const { flash }: any = usePage().props
+  const { flash, auth }: any = usePage().props
+  console.log(auth.notif)
 
   useEffect(() => {
     if (flash.success) {
@@ -23,7 +26,7 @@ export default function Authenticated({ user, header, children }: PropsWithChild
   }, [flash])
 
   return (
-    
+
     <div className="min-h-screen bg-gray-100 dark:bg-gray-900">
       <nav className="bg-white dark:bg-gray-800 border-b border-gray-100 dark:border-gray-700">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -64,7 +67,7 @@ export default function Authenticated({ user, header, children }: PropsWithChild
                     </Dropdown>
                   </div>
                 </div>
-                
+
                 <div className="hidden sm:flex sm:items-center sm:ms-6">
                   <div className="ms-3 relative">
                     <Dropdown>
@@ -87,7 +90,7 @@ export default function Authenticated({ user, header, children }: PropsWithChild
                     </Dropdown>
                   </div>
                 </div>
-                
+
                 <div className="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                   <NavLink href={route("case_category.index")} active={route().current("case_category.*")}>
                     Kategori
@@ -159,6 +162,9 @@ export default function Authenticated({ user, header, children }: PropsWithChild
             </div>
 
             <div className="hidden sm:flex sm:items-center sm:ms-6">
+            <div className="relative">
+                <NotificationButton notifications={auth.notif} />
+            </div>
               <div className="ms-3 relative">
                 <Dropdown>
                   <Dropdown.Trigger>
